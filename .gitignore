@@ -1,0 +1,10 @@
+# Node
+node_modules/
+dist/
+coverage/
+
+#OS/editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
