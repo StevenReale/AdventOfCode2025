@@ -1,10 +1,11 @@
 import { readInput } from "./utils/input";
 
 async function main() {
-  const [, , dayArg = "1", partArg = "1"] = process.argv;
+  const [, , dayArg = "1", partArg = "1", dataArg = "input"] = process.argv;
 
   const day = Number(dayArg);
   const part = Number(partArg);
+  const useSample = dataArg === "sample" || dataArg === "s";
 
   if (!Number.isInteger(day) || day < 1 || day > 25) {
     console.error("Usage: npm run dev -- <day 1-25> [part 1|2]");
@@ -26,7 +27,7 @@ async function main() {
     process.exit(1);
   }
 
-  const input = readInput(day);
+  const input = readInput(day, useSample ? "sample" : "input" );
   const answer = solver(input);
 
   console.log(`Day ${dayStr} part ${part}:`, answer);
