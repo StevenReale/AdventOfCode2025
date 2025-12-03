@@ -5,9 +5,9 @@
 
 | Day | Solution | Score |
 |-----|-------| ----- |
-| [1](https://adventofcode.com/2025/day/1) | [day01.ts](src\days\day01.ts)   | **    |
-| [2](https://adventofcode.com/2025/day/2) | [day02.ts](src\days\day02.ts)   | **    |
-| [3](https://adventofcode.com/2025/day/3) | [day03.ts](src\days\day03.ts)   | **    |
+| [1](https://adventofcode.com/2025/day/1) | [day01.ts](src/days/day01.ts)   | **    |
+| [2](https://adventofcode.com/2025/day/2) | [day02.ts](src/days/day02.ts)   | **    |
+| [3](https://adventofcode.com/2025/day/3) | [day03.ts](src/days/day03.ts)   | **    |
 
 ## Requirements
 
