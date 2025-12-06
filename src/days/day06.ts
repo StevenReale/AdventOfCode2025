@@ -38,7 +38,7 @@ function parseLine(line: string): number[] {
 function calculateProblemsAdvanced(lines: string[]): number {
     const operatorLine = lines[lines.length - 1];
     const valueLines = lines.slice(0, -1);
-    const width = operatorLine.length;
+    const width = Math.max(operatorLine.length, ...valueLines.map(l => l.length));
 
     let result = 0;
     let buffer : number[] = [];
