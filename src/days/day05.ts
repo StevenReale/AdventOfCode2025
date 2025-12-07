@@ -1,85 +1,119 @@
+type Interval = [number, number];
 const freshIngredients: number[][] = []; 
 
 export function part1(input: string): number | string {
-    const lines = input.split("\n");
+    const lines = input.trimEnd().split(/\r?\n/);
+    const ranges: Interval[] = [];
     let allRangesParsed = false;
     let totalFresh = 0;
-    for (let line of lines) {
-        if (line.trim() === '') {
+    for (const rawLine of lines) {
+        const line = rawLine.trim();
+        if (line === '') {
             allRangesParsed = true;
             continue;
         }
         if (!allRangesParsed) {
-            parseRange(line);
+            ranges.push(parseInterval(line));
         } else {
-            if (isFresh(Number(line)))
+            if (isFresh(Number(line), ranges))
                 totalFresh++
         }
     }
     return totalFresh;
 }
 
-function parseRange(range: string): void {
-    const boundaries = range.split('-');
-    const entry: number[] = [];
-    entry[0] = Number(boundaries[0]);
-    entry[1] = Number(boundaries[1]);
-    freshIngredients.push(entry);
+function parseInterval(range: string): Interval {
+    const [start, end] = range.split('-');
+    return [Number(start), Number(end)];
 } 
 
-function isFresh(ingredient: number): boolean {
-    for (const range of freshIngredients) {
-        if (ingredient >= range[0] && ingredient <= range[1])
+function isFresh(ingredient: number, ranges: Interval[]): boolean {
+    for (const [start, end] of ranges) {
+        if (ingredient >= start && ingredient <= end)
             return true;
     }
     return false;
 }
 
-let intervals: number[][] = [];
 export function part2(input: string): number | string {
-    const lines = input.split("\n");
-    let totalFresh = 0;
-    for (const line of lines) {
-        if (line.trim() === '')
+    const lines = input.trimEnd().split(/\r?\n/);
+
+    let intervals: Interval[] = [];
+
+    for (const rawLine of lines) {
+        const line = rawLine.trim();
+        if (line === '')
             break;
-        const boundaries = line.split('-');
-        const entry = [Number(boundaries[0]), Number(boundaries[1])];
-        insert(entry);
+        const boundaries = parseInterval(line);
+        intervals.push(boundaries);
     }
 
-    for (const interval of intervals) {
-        totalFresh += interval[1] - interval[0] + 1;    
+    const merged = mergeIntervals(intervals);
+
+    let totalFresh = 0;
+    for (const [start, end] of merged) {
+        totalFresh += end - start + 1;    
     }
+
     return totalFresh;
 }
 
-function insert(newInterval: number[]): void {
- const result = [];
- let addedNew = false;
+function mergeIntervals(intervals: Interval[]): Interval[] {
+    const merged = intervals.sort((a,b) => a[0] - b[0]);
+    const result: Interval[] = [];
+    let current = merged[0];
+
+    for (let i = 1; i < merged.length; i++) {
+
+        const next = merged[i];
+
+        if (next[0] > current[1]) {
+            result.push(current);
+            current = next;
+
+        }
+
+        else {
+            current[1] = Math.max(current[1], next[1]);
+        }
+    }
+
+    result.push(current);
+
+    return result;
+}
+
+//deprecated. Refactored to merge instead
+function insert(intervals: Interval[], newInterval: number[]): Interval[] {
+    const result: Interval[] = [];
+    let [newStart, newEnd] = newInterval;
+    let addedNew = false;
+    
+    for(let i=0; i<intervals.length; i++) {
+        if (addedNew) { 
+            result.push(intervals[i]); 
+            continue; 
+        }
+
+        const [curStart, curEnd] = intervals[i];
+    
+        if(newStart > curEnd) 
+            result.push(intervals[i]);
+        else if(newEnd < curStart) {
+            if(!addedNew) {
+                addedNew = true;
+                result.push([newStart, newEnd]);
+            }
+            result.push(intervals[i]);
+         }
+        else {
+            newStart = Math.min(curStart, newStart);
+            newEnd = Math.max(curEnd, newEnd);
+        }
+    }
  
- for(let i=0; i<intervals.length; i++) {
- if (addedNew) { 
- result.push(intervals[i]); 
- continue; 
- }
- 
- if((newInterval[0] > intervals[i][1])) 
- result.push(intervals[i]);
- else if((newInterval[1] < intervals[i][0])) {
- if(!addedNew) {
- addedNew = true;
- result.push(newInterval);
- }
- result.push(intervals[i]);
- }
- else {
- newInterval[0] = Math.min(intervals[i][0], newInterval[0]);
- newInterval[1] = Math.max(intervals[i][1], newInterval[1]);
- }
- }
- 
- if (!addedNew)
- result.push(newInterval);
- 
- intervals = result;
+    if (!addedNew)
+    result.push([newStart, newEnd]);
+    
+    return result;
  }

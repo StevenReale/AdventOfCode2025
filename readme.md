@@ -3,15 +3,14 @@
 ## Current Progress
 <img src = "AoCBanner.png">
 
-| Day | Solution | Score |
-|-----|-------| ----- |
-| [1](https://adventofcode.com/2025/day/1) | [day01.ts](src/days/day01.ts)   | **    |
+| Day | Solution | Score | Day | Solution | Score |
+|-----|-------| ----- |-----|-------| ----- |
+| [1](https://adventofcode.com/2025/day/1) | [day01.ts](src/days/day01.ts)   | **    | [7](https://adventofcode.com/2025/day/7) | [day07.ts](src/days/day07.ts)   | **    |
 | [2](https://adventofcode.com/2025/day/2) | [day02.ts](src/days/day02.ts)   | **    |
 | [3](https://adventofcode.com/2025/day/3) | [day03.ts](src/days/day03.ts)   | **    |
 | [4](https://adventofcode.com/2025/day/4) | [day04.ts](src/days/day04.ts)   | **    |
 | [5](https://adventofcode.com/2025/day/5) | [day05.ts](src/days/day05.ts)   | **    |
 | [6](https://adventofcode.com/2025/day/6) | [day06.ts](src/days/day06.ts)   | **    |
-| [7](https://adventofcode.com/2025/day/7) | [day07.ts](src/days/day07.ts)   | **    |
 
 ## Requirements
 

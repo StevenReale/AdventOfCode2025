@@ -3,8 +3,11 @@ node_modules/
 dist/
 coverage/
 
-#OS/editor cruft
+# OS/editor cruft
 .DS_Store
 Thumbs.db
 .idea/
 .vscode/
+
+# inputs folder, per AoC request
+inputs/
