@@ -11,6 +11,7 @@
 | [4](https://adventofcode.com/2025/day/4) | [day04.ts](src/days/day04.ts)   | **    |
 | [5](https://adventofcode.com/2025/day/5) | [day05.ts](src/days/day05.ts)   | **    |
 | [6](https://adventofcode.com/2025/day/6) | [day06.ts](src/days/day06.ts)   | **    |
+| [7](https://adventofcode.com/2025/day/7) | [day07.ts](src/days/day07.ts)   | **    |
 
 ## Requirements
 
