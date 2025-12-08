@@ -45,7 +45,7 @@ npm run dev -- 1 1
 npm run dev -- 2 2 sample
 ```
 
-Puzzle inputs live under `inputs/dayXX/`:
+Puzzle inputs live under `inputs/dayXX/`, but are omitted from this repo per AoC guideline:
 
 ```
 inputs/
