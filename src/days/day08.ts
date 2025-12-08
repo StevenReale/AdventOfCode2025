@@ -1,5 +1,3 @@
-const MAX_LENGTHS = 1000;
-
 export function part1(input: string, isSample: boolean): number {
     const lines = input.trimEnd().split(/\r?\n/);
     const maxDistancesToProcess = isSample ? 10 : 1000;
@@ -27,7 +25,6 @@ function findFinalConnection(lines: string[]): number {
     const {sortedDistances, distancesMap} = getSortedDistances(lines);
     const {junctionGraph, lastEntry} = getJunctionGraph(distancesMap, sortedDistances, lines.length, null);
     return Number(lastEntry[0].split(',')[0]) * Number(lastEntry[1].split(',')[0]);
-
 }
 
 function getSortedDistances(lines: string[]) {
@@ -43,6 +40,7 @@ function getSortedDistances(lines: string[]) {
     const sortedDistances = distances.sort((a, b) => a - b);
     return {sortedDistances, distancesMap};
 }
+
 function getDistance(pointA: string, pointB: string): number {
     const Acoords = pointA.split(',');
     const Bcoords = pointB.split(',');
