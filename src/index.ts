@@ -1,5 +1,7 @@
 import { readInput } from "./utils/input";
 
+type SolverFn = (input: string, isSample?: boolean) => unknown;
+
 async function main() {
   const [, , dayArg = "1", partArg = "1", dataArg = "input"] = process.argv;
 
@@ -20,7 +22,7 @@ async function main() {
   const modulePath = `./days/day${dayStr}`;
 
   const dayModule = await import(modulePath);
-  const solver = (dayModule as any)[`part${part}`] as (input: string) => unknown;
+  const solver = (dayModule as any)[`part${part}`] as SolverFn;
 
   if (typeof solver !== "function") {
     console.error(`Day ${dayStr} part ${part} not implemented yet.`);
@@ -28,7 +30,7 @@ async function main() {
   }
 
   const input = readInput(day, useSample ? "sample" : "input" );
-  const answer = solver(input);
+  const answer = solver(input, useSample);
 
   console.log(`Day ${dayStr} part ${part}:`, answer);
 }
